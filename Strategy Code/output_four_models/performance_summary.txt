@@ -1,0 +1,44 @@
+Training: 2010-01-05 to 2022-12-30
+              Model Starting value Ending value Annual return Annual volatility Sharpe ratio Max drawdown  Number of trades
+                 M1     100,000.00   330,596.28         9.65%            15.71%        0.636      -24.72%               514
+                 M2     100,000.00   280,059.87         8.26%            14.31%        0.594      -24.48%               626
+                 M3     100,000.00   269,895.48         7.95%            14.21%        0.578      -23.91%               566
+                 M4     100,000.00   246,104.05         7.18%            12.24%        0.591      -18.97%               586
+12-ETF buy-and-hold     100,000.00   265,938.21         7.83%            15.52%        0.534      -28.91%                 0
+   SPY buy-and-hold     100,000.00   432,132.07        11.94%            17.61%        0.703      -33.72%                 0
+
+Validation: 2023-01-03 to 2026-09-30
+              Model Starting value Ending value Annual return Annual volatility Sharpe ratio Max drawdown  Number of trades
+                 M1     100,000.00   225,069.88        24.32%            15.09%        1.222      -13.62%               150
+                 M2     100,000.00   226,202.44        24.49%            14.45%        1.279      -12.25%               198
+                 M3     100,000.00   228,666.11        24.85%            14.59%        1.288      -13.17%               194
+                 M4     100,000.00   221,143.56        23.74%            13.27%        1.336      -11.95%               196
+12-ETF buy-and-hold     100,000.00   228,876.47        24.88%            15.89%        1.197      -18.99%                 0
+   SPY buy-and-hold     100,000.00   209,072.86        21.89%            14.93%        1.102      -18.76%                 0
+
+Testing: 2026-10-01 to 2026-10-23
+              Model Starting value Ending value Annual return Annual volatility Sharpe ratio Max drawdown  Number of trades
+                 M1     100,000.00   100,953.35        15.10%            12.35%        0.874       -3.08%                 0
+                 M2     100,000.00   101,270.40        20.58%            11.92%        1.296       -2.90%                 4
+                 M3     100,000.00   101,058.13        16.89%            11.88%        1.035       -2.98%                 4
+                 M4     100,000.00   101,058.13        16.89%            11.88%        1.035       -2.98%                 4
+12-ETF buy-and-hold     100,000.00    96,958.57       -36.74%            14.76%       -3.325       -5.34%                 0
+   SPY buy-and-hold     100,000.00    99,651.20        -5.05%            10.23%       -0.863       -2.45%                 0
+
+All values are USD. Each period is rebased to 100,000; holdings continue.
+Annual return is geometric CAGR using 252 sessions per year.
+Sharpe uses daily BIL excess returns and their sample standard deviation.
+Volatility uses sample standard deviation of net portfolio returns.
+Drawdown includes the reporting period's initial value.
+Number of trades = individual executed ETF buys/sells, including BIL, by execution date.
+Displayed counts exclude initial purchases for all portfolios; their costs remain included.
+One portfolio rebalance may contain several ETF trades; see trading_activity.csv.
+The fixed 3-percentage-point band applies to all ETFs in M1-M4 and all periods.
+Benchmarks: initially equal-weighted 12 ETFs and SPY only; buy once, then no rebalancing.
+Benchmark weights and holdings continue across periods; reporting rebasing does not reset them.
+Benchmark trade counts are zero after excluding their initial 12 and 1 purchases.
+Testing has only 17 observations with the supplied snapshot; annualised metrics are unstable.
+This run has no parameter search or use of evaluation results in trading.
+Prior inspection of October remains a research limitation.
+Assumptions: fixed ETF universe; adjusted distributions; fractional long-only holdings;
+no leverage or tax; full fills at next close; 5 bps on buys and sells; no final liquidation.

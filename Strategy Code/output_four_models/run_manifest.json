@@ -1,0 +1,62 @@
+{
+  "parameters": {
+    "initial_capital": 100000.0,
+    "annual_sessions": 252,
+    "momentum_boundary": 252,
+    "momentum_skip": 21,
+    "top_n": 4,
+    "warmup": 252,
+    "decision_interval": 21,
+    "historical_window": 21,
+    "garch_minimum": 252,
+    "garch_window": 504,
+    "garch_horizon": 22,
+    "trend_window": 200,
+    "target_cap": 0.5,
+    "trade_band": 0.03,
+    "cost_rate": 0.0005
+  },
+  "periods": {
+    "Training": [
+      "2010-01-05",
+      "2022-12-30"
+    ],
+    "Validation": [
+      "2023-01-03",
+      "2026-09-30"
+    ],
+    "Testing": [
+      "2026-10-01",
+      "2026-10-23"
+    ]
+  },
+  "models": {
+    "M1": "Momentum + equal weights",
+    "M2": "Momentum + historical inverse volatility",
+    "M3": "Momentum + GARCH inverse volatility",
+    "M4": "Momentum + GARCH + individual SMA200",
+    "BH_12": "Initially equal-weighted 12-ETF buy-and-hold",
+    "BH_SPY": "SPY buy-and-hold"
+  },
+  "source_sha256": {
+    "ETF12_Adjusted_Close_Full.csv": "3fc52677560f036fff59a460f074507761cda252f8fe63917540a953a5db42b7",
+    "ETF12_Simple_Returns_Full.csv": "d132544d93a43e9736b0fdb42c3b2a44a3f90d4447725986278fa7d9c8ed29e9"
+  },
+  "python": "3.14.6",
+  "packages": {
+    "numpy": "2.4.6",
+    "pandas": "2.3.3",
+    "scipy": "1.18.0",
+    "arch": "8.0.0"
+  },
+  "causality_checks_run": true,
+  "garch_fits": 760,
+  "garch_fallbacks": 0,
+  "trade_count_definition": "Executed ETF buy/sell orders; all initial purchases excluded; assigned by execution date",
+  "benchmark_initial_orders": {
+    "BH_12": 12,
+    "BH_SPY": 1
+  },
+  "execution": "next_session_close",
+  "notes": "All values are USD. Each period is rebased to 100,000; holdings continue.\nAnnual return is geometric CAGR using 252 sessions per year.\nSharpe uses daily BIL excess returns and their sample standard deviation.\nVolatility uses sample standard deviation of net portfolio returns.\nDrawdown includes the reporting period's initial value.\nNumber of trades = individual executed ETF buys/sells, including BIL, by execution date.\nDisplayed counts exclude initial purchases for all portfolios; their costs remain included.\nOne portfolio rebalance may contain several ETF trades; see trading_activity.csv.\nThe fixed 3-percentage-point band applies to all ETFs in M1-M4 and all periods.\nBenchmarks: initially equal-weighted 12 ETFs and SPY only; buy once, then no rebalancing.\nBenchmark weights and holdings continue across periods; reporting rebasing does not reset them.\nBenchmark trade counts are zero after excluding their initial 12 and 1 purchases.\nTesting has only 17 observations with the supplied snapshot; annualised metrics are unstable.\nThis run has no parameter search or use of evaluation results in trading.\nPrior inspection of October remains a research limitation.\nAssumptions: fixed ETF universe; adjusted distributions; fractional long-only holdings;\nno leverage or tax; full fills at next close; 5 bps on buys and sells; no final liquidation.\n"
+}

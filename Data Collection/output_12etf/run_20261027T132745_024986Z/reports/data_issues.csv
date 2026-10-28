@@ -1,0 +1,2 @@
+Severity,Ticker,Date,Issue,Detail
+WARNING,XLE,2020-03-09,large_return,Decimal return=-0.201411731; review raw prices/actions. Retained.

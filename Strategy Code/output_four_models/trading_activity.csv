@@ -1,0 +1,19 @@
+Period,Model,Number of trades,ETF buy orders,ETF sell orders,Portfolio rebalances
+Training,M1,514,248,266,101
+Training,M2,626,298,328,129
+Training,M3,566,278,288,114
+Training,M4,586,289,297,122
+Training,BH_12,0,0,0,0
+Training,BH_SPY,0,0,0,0
+Validation,M1,150,75,75,28
+Validation,M2,198,95,103,40
+Validation,M3,194,93,101,39
+Validation,M4,196,93,103,40
+Validation,BH_12,0,0,0,0
+Validation,BH_SPY,0,0,0,0
+Testing,M1,0,0,0,0
+Testing,M2,4,1,3,1
+Testing,M3,4,2,2,1
+Testing,M4,4,2,2,1
+Testing,BH_12,0,0,0,0
+Testing,BH_SPY,0,0,0,0

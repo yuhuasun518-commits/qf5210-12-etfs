@@ -1,0 +1,85 @@
+{
+  "status": "REVIEW_WARNINGS",
+  "downloaded_at_utc": "20261027T132745_024986Z",
+  "source": "Yahoo Finance via yfinance",
+  "tickers": [
+    "EWS",
+    "SPY",
+    "AGG",
+    "GLD",
+    "BIL",
+    "QQQ",
+    "IWM",
+    "EFA",
+    "EEM",
+    "XLK",
+    "XLE",
+    "DBC"
+  ],
+  "currency": "USD",
+  "price_fields": [
+    "Adj Close",
+    "Adj Open"
+  ],
+  "adjusted_open_formula": "Open[t] * AdjClose[t] / Close[t]",
+  "return_price_field": "Adj Close",
+  "requested_start_inclusive": "2010-01-01",
+  "requested_end_inclusive": "2026-10-23",
+  "periods_inclusive": {
+    "Training": [
+      "2010-01-01",
+      "2022-12-31"
+    ],
+    "Validation": [
+      "2023-01-01",
+      "2026-09-30"
+    ],
+    "Testing": [
+      "2026-10-01",
+      "2026-10-23"
+    ]
+  },
+  "calendar": "NYSE",
+  "auto_adjust": false,
+  "repair": false,
+  "return_formula": "AdjClose[t]/AdjClose[t-1]-1",
+  "return_units": "decimal",
+  "missing_policy": "Keep missing values; never fill",
+  "initial_return_row_omitted": "2010-01-04",
+  "large_return_threshold": 0.2,
+  "errors": 0,
+  "warnings": 1,
+  "python": "3.14.6",
+  "packages": {
+    "yfinance": "1.7.0",
+    "pandas": "2.3.3",
+    "numpy": "2.4.6",
+    "pandas_market_calendars": "5.5.0"
+  },
+  "sha256": {
+    "data\\ETF12_Adjusted_Close_Full.csv": "3fc52677560f036fff59a460f074507761cda252f8fe63917540a953a5db42b7",
+    "data\\ETF12_Adjusted_Open_Full.csv": "b07ce5b5b4bd54912bbbb9ae2ba961aeeebaf4e914fafab044c9b335d6dce75c",
+    "data\\ETF12_Adjusted_Open_Testing.csv": "891756cb784a8749bd3963cc994ba6b0e228bc5449fb541e619578108d506787",
+    "data\\ETF12_Adjusted_Open_Training.csv": "f6341e98151ee40a1e886bd51921260a0e9b8e335abbe7cb54c9394a559c729b",
+    "data\\ETF12_Adjusted_Open_Validation.csv": "faa19283950de3ed43181ad8fc7823d24ea837f4a9bda5dfcca587779b1ef393",
+    "data\\ETF12_Simple_Returns_Full.csv": "d132544d93a43e9736b0fdb42c3b2a44a3f90d4447725986278fa7d9c8ed29e9",
+    "data\\ETF12_Simple_Returns_Testing.csv": "c96ae97c0f129a94362437c5359696404898c46e7aeff2b1e534adfe09ec67ca",
+    "data\\ETF12_Simple_Returns_Training.csv": "90b995620008cab2c85d243fbcfd588ae24c6f3e39f4e28e8c79971f6b6ffb48",
+    "data\\ETF12_Simple_Returns_Validation.csv": "28c76bbf1ff397dc8a0fa96d5ccb6e533fe629002a98206b0ef9d64b06061175",
+    "raw\\AGG_yahoo_history.csv": "af76347ab1a0231b6bc3b6f73d83c314a53b6dbf99a6a82ba4e4e584878d43bd",
+    "raw\\BIL_yahoo_history.csv": "b6436838baa822549ac5cf34c9f24e013fe38812c9cc6109215cd815a28e760e",
+    "raw\\DBC_yahoo_history.csv": "30849ee9344ca62fd1a3807369118f72ad3ea189a1592ed5645d9e5405c220f3",
+    "raw\\EEM_yahoo_history.csv": "1b0cc68967704cd5ac40f6e0c2eadf13070b31d2b471e26ff2c49850042fee4e",
+    "raw\\EFA_yahoo_history.csv": "bf9197d1aa279f46f1f675aba090d8b13b1d15d5c1183c0515eda3eb0b3cc375",
+    "raw\\EWS_yahoo_history.csv": "2668b72a14ab8b7b96e4e9287e959337753cb2907d19e2fd87114df252bc5d6e",
+    "raw\\GLD_yahoo_history.csv": "3cc0037aa4eb7cbcef95cf2a3aac6457aec428ad095de1bae0aaba63253ed118",
+    "raw\\IWM_yahoo_history.csv": "93c7437d1aeb93d52981dd3d396830d83768a44a03a7d52a61be138d11828e02",
+    "raw\\QQQ_yahoo_history.csv": "85051a28dd3fe038c58cf3465ffd68ceb594f6d0a13d36dd13522bbd8d33d6d3",
+    "raw\\SPY_yahoo_history.csv": "0e75f39adbafc95f971b5a2de0ab4db34aa93f517993536cc191a3d9b30e6d48",
+    "raw\\XLE_yahoo_history.csv": "5dc1744933082a2ff218912ca6c9c8d1100bb40d00738bb6eadc8c636284d70e",
+    "raw\\XLK_yahoo_history.csv": "017f54d6d77f8cb6d28c04e45300166ecee63389d10b6c13da923d11d8419f41",
+    "reports\\data_issues.csv": "5c8f5ea1a2c5fc72c2265cdfdc37ec8fc0c3edadc12b3f6d3a85afaf2cf9e7bd",
+    "reports\\data_quality_summary.csv": "c2b6bffe6b700c7d171cbf21432929d00f5afc3bd17e29da32161519a430ae8a",
+    "reports\\price_quality_summary.csv": "cb09172a1bae4dfde401666d7206f9400509fd44ecdcdf66e57cd6962fb21c49"
+  }
+}

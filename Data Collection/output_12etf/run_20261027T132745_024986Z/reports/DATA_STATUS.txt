@@ -1,0 +1,20 @@
+STATUS: REVIEW_WARNINGS
+Errors: 0; review warnings: 1
+Data directory: C:\Users\yuhua\Desktop\QF5210 Project\Project Code 12 ETFs\output_12etf\run_20261027T132745_024986Z\data
+All bounds are inclusive. Validation corrected to September 30.
+Adjusted Open = Open * (Adj Close / Close), using a single download snapshot.
+Adjusted Open price files are split by date, including each period's first session.
+Simple-return files remain CLOSE-TO-CLOSE; decimal units (0.01 = 1%).
+Adjusted prices are not actual historical cash execution quotes.
+Only the initial structural empty return row is omitted.
+Returns computed before splitting; missing values/rows are retained.
+PASS: automated checks passed; not independent verification of vendor prices.
+REVIEW_WARNINGS: review data_issues.csv, including large returns.
+FAIL: incomplete/invalid data; resolve errors before modelling.
+Raw Yahoo history and corporate actions are in raw/ for investigation.
+Adjusted history may be revised; archive this dated snapshot.
+The fixed ETF universe does not remove retrospective selection bias.
+
+Training: 3271 rows | 2010-01-05 to 2022-12-30 | missing cells=0
+Validation: 939 rows | 2023-01-03 to 2026-09-30 | missing cells=0
+Testing: 17 rows | 2026-10-01 to 2026-10-23 | missing cells=0
