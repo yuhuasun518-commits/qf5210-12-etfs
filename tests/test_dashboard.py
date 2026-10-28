@@ -62,7 +62,8 @@ def test_zero_downside_and_zero_volatility_are_undefined(bundle):
 
 
 @pytest.mark.parametrize("period", ["Training", "Validation", "Testing"])
-def test_app_portfolio_selections(period):
+def test_app_portfolio_selections(period, monkeypatch):
+    monkeypatch.setenv("QF5210_LOCAL_MODE", "1")
     from streamlit.testing.v1 import AppTest
     app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / "streamlit_app.py"), default_timeout=40).run()
     assert not app.exception

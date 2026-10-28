@@ -4,14 +4,17 @@ Streamlit performance dashboard for four momentum portfolios and two buy-and-hol
 
 ## Run the dashboard
 
-Use Python 3.11 or 3.12. From this folder:
+Use Python 3.11 or 3.12. On Windows, double-click `start_dashboard.bat` to install dashboard dependencies and launch it in local mode. The terminal prints the local URL (usually `http://localhost:8501`). No API key or fresh market-data download is required.
+
+For a manual Windows PowerShell launch, run from this folder:
 
 ```bash
 python -m pip install -r requirements.txt
+$env:QF5210_LOCAL_MODE="1"
 python -m streamlit run streamlit_app.py
 ```
 
-On Windows, double-click `start_dashboard.bat` to install dashboard dependencies and launch it. The terminal prints the local URL (usually `http://localhost:8501`). No API key or fresh market-data download is required.
+On macOS/Linux, replace the last two commands with `QF5210_LOCAL_MODE=1 python -m streamlit run streamlit_app.py`. Do not set this local-only flag on a hosted deployment.
 
 ## Dashboard views
 
@@ -20,6 +23,7 @@ On Windows, double-click `start_dashboard.bat` to install dashboard dependencies
 - **Allocations:** actual end-of-day holdings, final weights, average weights, and decision targets.
 - **Trading activity:** order counts, rebalance counts, actual USD costs, execution logs, and CSV downloads.
 - **Methodology & checks:** metric definitions, source hashes, reconciliation to all 18 archived portfolio/period rows, archived causality checks, data warning, and research limitations.
+- **Project files:** download the complete project ZIP, Word report, all-period results, or selected Python source; read source code directly in the app.
 
 Select training, validation, or testing, choose a focus portfolio, and choose the portfolios to compare. Clearing the comparison selector keeps the focus portfolio visible. The default period is validation; the default focus is M1. No winner is automatically selected using testing results.
 
@@ -74,7 +78,13 @@ python -m pytest -q
 
 ## Deploy on Streamlit Community Cloud
 
-After this project is uploaded to your GitHub repository, create an app in [Streamlit Community Cloud](https://share.streamlit.io/). Select the repository, branch `main`, and main file path `streamlit_app.py`. Choose Python 3.11 or 3.12. Dependencies are in the root `requirements.txt`. Confirm the app access setting before sharing course material; a private GitHub repository alone is not a substitute for checking app visibility.
+Create an app in [Streamlit Community Cloud](https://share.streamlit.io/). Keep the GitHub repository private. Select branch `main` and main file path `streamlit_app.py`. Choose Python 3.11 or 3.12. Dependencies are in the root `requirements.txt`.
+
+Before deployment, generate a random access token (for example, `secrets.token_urlsafe(32)`) and save it as the root `share_token` value in Streamlit's **Advanced settings → Secrets**. Never commit the real token. Hosted content stays blocked if the token is missing, shorter than 32 characters, or does not match the visitor's link. Do not set `QF5210_LOCAL_MODE` on the host.
+
+To allow recipients without Streamlit invitations, the Streamlit app endpoint must be publicly reachable. The app then checks the access token before showing any project data or downloads. Share the deployed app URL with `?access=YOUR_RANDOM_TOKEN` appended. Anyone receiving the complete link can open the dashboard and download all project files. Keep the complete link private to your intended audience; they can forward it. Changing the token in Streamlit Secrets invalidates the old link on the next app run. The bare app URL only shows an access message. This is application-level link access, not a native Streamlit "unlisted" setting; the GitHub repository remains private.
+
+The download ZIP uses `download_manifest.json` as an explicit file allowlist. Runtime secrets, environment files, git history, and symlinks are excluded. If you deliberately add project deliverables later, update that manifest.
 
 See [Streamlit's deployment guide](https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/deploy). A local dashboard and GitHub repository do not by themselves create a hosted Streamlit app.
 

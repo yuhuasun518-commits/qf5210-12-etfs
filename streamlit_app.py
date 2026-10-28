@@ -1,5 +1,6 @@
 """Streamlit dashboard for the supplied QF5210 12-ETF backtest snapshot."""
 import calendar
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -8,8 +9,11 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from dashboard_data import COLORS, LABELS, MODELS, TICKERS, load_bundle, monthly_returns, period_curves
+from project_downloads import project_archive
+from share_access import require_shared_link
 
 st.set_page_config(page_title="QF5210 | Alpha Trading", page_icon="📈", layout="wide")
+require_shared_link()
 st.markdown("""<style>
 .block-container {max-width:1500px;padding-top:2rem;padding-bottom:3rem;}
 h1 {letter-spacing:-1.2px;font-weight:750!important;}
@@ -25,6 +29,11 @@ h2,h3 {letter-spacing:-.4px;}
 @st.cache_data(show_spinner="Checking archived results…", ttl=60)
 def cached_bundle():
     return load_bundle()
+
+
+@st.cache_data(show_spinner="Preparing project files…", ttl=60)
+def cached_project_archive():
+    return project_archive()
 
 
 def style_chart(fig, height=390, percent=False):
@@ -108,7 +117,7 @@ for col, (title, metric, kind) in zip(cols, cards2):
     col.metric(title, fmt(row[metric], kind))
 cols[3].metric("ETF orders · excluding initial", f"{int(row['Number of trades']):,}")
 st.write("")
-performance, risk, allocation, activity, methodology = st.tabs(["Performance", "Risk", "Allocations", "Trading activity", "Methodology & checks"])
+performance, risk, allocation, activity, methodology, project_files = st.tabs(["Performance", "Risk", "Allocations", "Trading activity", "Methodology & checks", "Project files"])
 
 with performance:
     st.subheader("Growth of $100,000")
@@ -269,6 +278,36 @@ Undefined ratios are shown as N/A. Reporting periods rebase wealth only; they do
     with st.expander("Backtest parameters and source manifest"):
         st.json(manifest)
     st.download_button("Download all-period dashboard metrics", metrics.to_csv(index=False).encode(), "all_period_dashboard_metrics.csv", "text/csv")
+
+with project_files:
+    st.subheader("Download the project")
+    st.caption("Get the original code, report, input data, archived results, and this dashboard together.")
+    project_root = Path(__file__).resolve().parent
+    try:
+        archive_bytes = cached_project_archive()
+    except (OSError, ValueError) as exc:
+        st.error(f"The project download is unavailable: {exc}")
+    else:
+        st.download_button("Download full project (ZIP)", archive_bytes,
+                           "qf5210-12-etfs-dashboard.zip", "application/zip", key="download_project", type="primary")
+        st.caption(f"{len(archive_bytes) / 1024 / 1024:.1f} MB · Extract the ZIP and open README.md for setup instructions.")
+    a, b = st.columns(2)
+    with a:
+        st.download_button("Download report (Word)", (project_root / "QF5210_Report.docx").read_bytes(),
+                           "QF5210_Report.docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+    with b:
+        st.download_button("Download all performance results (CSV)", metrics.to_csv(index=False).encode(),
+                           "all_period_dashboard_metrics.csv", "text/csv", key="download_project_metrics")
+    st.subheader("Read the code")
+    sources = {"Strategy backtest": "Strategy Code/QF5210_Four_Models_Spyder.py",
+               "Data collection": "Data Collection/QF5210_12ETF_Data_Collector.py",
+               "Dashboard": "streamlit_app.py", "Performance calculations": "dashboard_data.py"}
+    source = st.selectbox("Source file", list(sources), key="project_source")
+    source_path = project_root / sources[source]
+    code = source_path.read_text(encoding="utf-8")
+    st.download_button("Download selected code", code, source_path.name, "text/x-python")
+    with st.expander("View selected source code"):
+        st.code(code, language="python")
 
 st.divider()
 st.caption("QF5210 · Alpha Trading | Archived snapshot · USD | Dashboard calculations reconciled to the supplied backtest")
